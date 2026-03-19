@@ -91,7 +91,8 @@ func PluginUpdateHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error converting status to val", http.StatusInternalServerError)
 		return
 	}
-
+	fmt.Println("new pname", pName)
+	fmt.Println("new pstatus", pStatusVal)
 	pluginservice.UpdatePluginStatus(pName.(string), pStatusVal)
 	// 响应数据
 	w.WriteHeader(http.StatusOK)

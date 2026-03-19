@@ -30,9 +30,11 @@ func UpdatePluginStatus(name string, pluginStatus plugin.PluginStatus) {
 	for i := 0; i < len(oldChain.Plugins); i++ {
 		p := oldChain.Plugins[i]
 		if p.Name() == name {
+			fmt.Println("plugin found, new status", pluginStatus)
 			// 匹配到后设置状态
 			found = true
 			p.SetStatus(pluginStatus)
+			fmt.Println("plugin status:", p.Status())
 		}
 		newPlugins = append(newPlugins, p)
 	}
@@ -44,4 +46,5 @@ func UpdatePluginStatus(name string, pluginStatus plugin.PluginStatus) {
 
 	// 更新全局插件状态
 	UpdateChain(newPlugins)
+	fmt.Println(newPlugins)
 }

@@ -40,16 +40,16 @@ type PluginImpl struct {
 	ExePath       string
 }
 
-func (p PluginImpl) Name() string {
+func (p *PluginImpl) Name() string {
 	return p.PluginName
 }
 
-func (p PluginImpl) Version() string {
+func (p *PluginImpl) Version() string {
 	return p.PluginVersion
 }
 
 // Run 执行插件
-func (p PluginImpl) Run(data map[string]interface{}) (map[string]interface{}, error) {
+func (p *PluginImpl) Run(data map[string]interface{}) (map[string]interface{}, error) {
 
 	resMap := map[string]interface{}{}
 	var err error
@@ -74,10 +74,10 @@ func (p PluginImpl) Run(data map[string]interface{}) (map[string]interface{}, er
 	return resMap, err
 }
 
-func (p PluginImpl) Status() PluginStatus {
+func (p *PluginImpl) Status() PluginStatus {
 	return p.PStatus
 }
 
-func (p PluginImpl) SetStatus(status PluginStatus) {
+func (p *PluginImpl) SetStatus(status PluginStatus) {
 	p.PStatus = status
 }
