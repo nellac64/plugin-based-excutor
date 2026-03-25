@@ -9,11 +9,15 @@ import (
 
 // init 初始化读取最初的插件执行链
 func init() {
-	GetExecutionChain()
+	fmt.Println("enter init")
+	chain := GetExecutionChain()
+	UpdateChain(chain)
 }
 
 // GetExecutionChain 从路径中获取路径下脚本并排序 生成插件执行链
 func GetExecutionChain() []plugin.Plugin {
+	fmt.Println("enter GetExecutionChain")
+
 	filePath := localconst.PluginPath
 	dirEntries, err := os.ReadDir(filePath)
 	if err != nil {
@@ -24,6 +28,7 @@ func GetExecutionChain() []plugin.Plugin {
 	var plugins []plugin.Plugin
 	for _, dirEntry := range dirEntries {
 		fullPath := filePath + "/" + dirEntry.Name()
+		fmt.Println(fullPath)
 		p := CreateSinglePlugin(fullPath)
 		plugins = append(plugins, p)
 	}
@@ -38,5 +43,5 @@ func CreateSinglePlugin(pluginPath string) plugin.Plugin {
 		ExePath:       pluginPath,
 		PStatus:       plugin.Running,
 	}
-	return impl
+	return &impl
 }
